@@ -1,0 +1,7 @@
+{% extends 'blog/post_list.html'%}
+{% block content %}
+    {% for post in posts %}
+        <p>{{ post.id }}. {{ post.text }}</p>
+        <div class="line"></div>
+    {% endfor %}
+{% endblock %}
