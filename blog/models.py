@@ -27,6 +27,7 @@ class Post(models.Model):
     def simple_users(self):
         return self.objects.exclude(username='admin')
 
+
 class CodexPost(models.Model):
     id = models.AutoField(primary_key=True)
     text = models.TextField()

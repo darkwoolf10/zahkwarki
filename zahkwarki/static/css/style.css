@@ -173,3 +173,8 @@ a.article:hover {
 .black {
     color: black;
 }
+
+.punishment-count {
+    font-size: 5em;
+    text-align: center;
+}
