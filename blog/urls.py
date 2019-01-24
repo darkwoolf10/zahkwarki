@@ -6,4 +6,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('codex/', views.codex, name='codex'),
     path('show_user_list/<int:id>', views.show_user_list, name='user_list'),
+    path('api/login', views.login),
+    path('api/sampleapi', views.sample_api),
 ]
