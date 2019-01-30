@@ -1,6 +1,5 @@
 <template>
-    <div id="content">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
 
               <button type="button" id="sidebarCollapse" class="btn btn-info">
@@ -23,7 +22,6 @@
               </div>
           </div>
       </nav>
-    </div>
 </template>
 
 <script>
@@ -31,7 +29,6 @@
         name: "Header",
         data() {
             return {
-
             }
         },
         props: {

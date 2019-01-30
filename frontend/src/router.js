@@ -23,6 +23,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
+      path: '/codex',
+      name: 'codex',
+      component: () => import(/* webpackChunkName: "codex" */ './views/Codex.vue')
+    },
+    {
       path: '/login',
       name: 'login',
       component: Login

@@ -9,11 +9,7 @@
                 <p>Punishment: {{ post.punishment_quantity }} {{ post.punishment_type }}</p>
                 <p>Author: {{ post.author }}</p>
             </div>
-            <div class="col-1">
-                <div style="font-size: 5em">
-                    {{ post.punishment_count }}
-                </div>
-            </div>
+            <punishmentcount v-bind:count="{{ post.punishment_count }}"/>
         </div>
         <div class="line"></div>
     {% endfor %}

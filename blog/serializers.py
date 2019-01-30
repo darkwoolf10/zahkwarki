@@ -3,12 +3,6 @@ from .models import Post, CodexPost
 from django.contrib.auth.models import User, Group
 
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Post
-        fields = '__all__'
-
-
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -24,4 +18,11 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class CodexSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CodexPost
+        fields = '__all__'
+
+
+class PostSerializer(serializers.HyperlinkedModelSerializer):
+    author = UserSerializer()
+    class Meta:
+        model = Post
         fields = '__all__'

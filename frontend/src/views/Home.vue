@@ -1,25 +1,33 @@
 <template>
   <div class="home wrapper">
     <Sidebar v-bind:users="users"/>
-    <Header v-bind:users="users" v-bind:login="login"/>
+    <div id="content">
+      <Header v-bind:users="users" v-bind:login="login"/>
+      <Content v-bind:posts="posts"/>
     </div>
+  </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
 import Sidebar from '@/components/Sidebar.vue'
+import Content from '@/components/Content.vue'
+
+const axios = require('axios');
 
 export default {
   name: 'home',
   data() {
       return {
           users: false,
-          login: true
+          login: true,
+          posts: ""
       }
   },
   components: {
     Header,
-    Sidebar
+    Sidebar,
+    Content
   },
   mounted() {
       $(document).ready(function () {
@@ -39,6 +47,18 @@ export default {
             this.users = response;
             this.login = false;
         }
+    });
+    let self = this;
+    axios.get(this.$store.state.url_server + 'api/posts/',{
+        headers: {'Authorization':'Token ' + sessionStorage.getItem("token")}
+    })
+    .then(function (response) {
+      // handle success
+      self.posts = response.data;
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
     });
   }
 }
