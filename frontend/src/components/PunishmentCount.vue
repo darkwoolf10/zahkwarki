@@ -1,8 +1,9 @@
 <template>
     <div class="col-1 punishment-count">
-        <div @mouseover="showPlus" @click="punishmentUp" v-if="show">{{count}}</div>
-        <div @mouseleave="showPlus" v-else class="plus">
-            <font-awesome-icon icon="plus" />
+        <div @mouseover="showPlus" v-if="show" v-model="count">{{count}}</div>
+        <div @mouseleave="showPlus" v-else >
+            <font-awesome-icon @click="punishmentUp" class="plus" icon="plus" />
+            <font-awesome-icon @click="punishmentDown" class="minus" icon="minus" />
         </div>
     </div>
 </template>
@@ -18,26 +19,14 @@ export default {
     },
     props: {
         count: "",
-        post_id: "",
+        postId: "",
         punishment_quantity: ""
     },
     methods: {
         showPlus: function () {
             this.show = !this.show;
         },
-        punishmentUp: function () {
-           axios.post(this.$store.state.url_server + 'api/post_up/' + post_id,{
-               headers: {'Authorization':'Token ' + sessionStorage.getItem("token")}
-           })
-           .then(function (response) {
-             // handle success;
-               this.count += this.punishment_quantity;
-           })
-           .catch(function (error) {
-             // handle error
-             console.log(error);
-           });
-        }
+
     }
 }
 </script>
@@ -50,5 +39,16 @@ export default {
 
 .punishment-count:hover {
     cursor: pointer;
+}
+
+.plus {
+    font-size: 0.4em;
+    display: inline;
+    margin-right: 10%;
+}
+
+.minus {
+    font-size: 0.4em;
+    display: inline;
 }
 </style>

@@ -23,6 +23,8 @@ class CodexSerializer(serializers.HyperlinkedModelSerializer):
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     author = UserSerializer()
+    # id = serializers.Field()
+
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ('id', 'author', 'for_whom', 'text', 'punishment_count', 'punishment_type', 'punishment_quantity')

@@ -38,6 +38,31 @@ def sample_api(request):
     data = {'sample_data': 123}
     return Response(data, status=HTTP_200_OK)
 
+
+@csrf_exempt
+@api_view(["POST"])
+def punishment_up(request, id):
+    post = Post.objects.get(id=id)
+    if post:
+        post.punishment_count += post.punishment_quantity
+        post.save()
+        return Response({'success': True}, status=HTTP_200_OK)
+    else:
+        return Response({'error': 'Post not found'}, status=HTTP_404_NOT_FOUND)
+
+
+@csrf_exempt
+@api_view(["POST"])
+def punishment_down(request, id):
+    post = Post.objects.get(id=id)
+    if post:
+        post.punishment_count -= post.punishment_quantity
+        post.save()
+        return Response({'success': True}, status=HTTP_200_OK)
+    else:
+        return Response({'error': 'Post not found'}, status=HTTP_404_NOT_FOUND)
+
+
 def post_list(request):
     posts = Post.objects.all().order_by('created_date')
     users = User.objects.exclude(username='admin')
