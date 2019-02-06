@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-const url = process.env.NODE_ENV !== "production" ?  "http://127.0.0.1:5000/" : "real";
+const url = process.env.NODE_ENV !== "production" ?  "http://127.0.0.1:5000/" : "https://warm-ravine-38295.herokuapp.com/";
 
 export default new Vuex.Store({
   state: {
