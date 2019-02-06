@@ -23,6 +23,7 @@
         mdb-btn(
           color="primary"
           class="float-right"
+          @click="goToLogin"
         ) Login
 
       Content(:posts="posts")
@@ -80,7 +81,9 @@ export default {
   methods: {
     toggleSidebar() {
       this.sidebar = !this.sidebar;
-
+    },
+    goToLogin() {
+      this.$router.push('login');
     }
   }
 }
