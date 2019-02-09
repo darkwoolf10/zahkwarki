@@ -12,9 +12,9 @@
             color="secondary"
           ) Close menu
           ul
-            li: a(href="/about") about
-            li: a(href="/codex") codex
-            li(v-for="user in users"): a(href="#") {{user.username}}
+            li: router-link(to="/about") About
+            li: router-link(to="/codex") Codex
+            li(v-for="user in users"): router-link(to="#") {{user.username}}
 
       .header
         .btn(
@@ -26,13 +26,15 @@
           @click="goToLogin"
         ) Login
 
-      Content(:posts="posts")
+      .container
+        .item(v-for="post in posts" :key="post.id")
+          PunishmentCount(:post="post")
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
 import Sidebar from '@/components/Sidebar.vue'
-import Content from '@/components/Content.vue'
+import PunishmentCount from '@/components/PunishmentCount.vue'
 import { mdbBtn, mdbBtnFixed, mdbBtnFixedItem, mdbIcon } from 'mdbvue';
 
 export default {
@@ -49,25 +51,23 @@ export default {
   components: {
     Header,
     Sidebar,
-    Content,
+    PunishmentCount,
     mdbBtn,
     mdbIcon
   },
   mounted() {
   },
   created() {
-    $.ajax({
-        url: this.$store.state.url_server + 'api/users/',
-        type: 'GET',
-        headers: {
-            'Authorization':'Token ' + sessionStorage.getItem("token"),
-        },
-        success: (response) => {
-            this.users = response;
-            this.login = false;
-        }
-    });
     let self = this;
+    this.axios.get(this.$store.state.url_server + 'api/users/',{
+        headers: {'Authorization':'Token ' + sessionStorage.getItem("token")}
+    })
+    .then(function (response) {
+      self.users = response.data;
+      self.login = false;
+    }).catch(function (error) {
+      console.log(error);
+    });
     this.axios.get(this.$store.state.url_server + 'api/posts/',{
         headers: {'Authorization':'Token ' + sessionStorage.getItem("token")}
     })
